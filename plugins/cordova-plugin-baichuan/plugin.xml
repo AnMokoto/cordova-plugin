@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-baichuan" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>cordovaPluginBaichuan</name>
+  <js-module name="cordovaPluginBaichuan" src="www/cordovaPluginBaichuan.js">
+    <clobbers target="BC"/>
+  </js-module>
+
+  <platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="cordovaPluginBaichuan">
+        <param name="android-package" value="com.mokoto.cordova.baichuan.cordovaPluginBaichuan"/>
+      </feature>
+    </config-file>
+    <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+    <source-file src="src/android/cordovaPluginBaichuan.java" target-dir="src/com/mokoto/cordova/baichuan"/>
+    <source-file src="src/android/BaichuanProxy.java" target-dir="src/com/mokoto/cordova/baichuan"/>
+    <framework custom="true" src="src/android/baichuan.gradle" type="gradleReference"/>
+  </platform>
+  <platform name="ios">
+    <config-file parent="/*" target="config.xml">
+      <feature name="cordovaPluginBaichuan">
+        <param name="ios-package" value="cordovaPluginBaichuan"/>
+      </feature>
+    </config-file>
+    <source-file src="src/ios/cordovaPluginBaichuan.m"/>
+  </platform>
+</plugin>

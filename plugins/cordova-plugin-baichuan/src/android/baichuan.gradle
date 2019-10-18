@@ -1,0 +1,37 @@
+repositories {
+    jcenter()
+    maven {
+        url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/"
+    }
+}
+
+dependencies {
+
+    implementation  'com.alibaba:fastjson:1.2.58'
+    // mtop
+    implementation 'com.taobao.android:mtopsdk_allinone_open:3.1.2.5@jar'
+
+    // auth
+    implementation 'com.ali.auth.sdk:alibabauth_core:2.0.0.6@aar'
+    implementation 'com.ali.auth.sdk:alibabauth_ui:2.0.0.6@aar'
+    implementation 'com.ali.auth.sdk:alibabauth_ext:2.0.0.6@aar'
+
+    // app link
+    implementation 'com.alibaba.sdk.android:alibc_link_partner:4.1.11@aar'
+
+    // sdk
+    implementation 'com.alibaba.sdk.android:AlibcTradeCommon:4.0.0.2@aar'
+    implementation 'com.alibaba.sdk.android:AlibcTradeBiz:4.0.0.2@aar'
+    implementation 'com.alibaba.sdk.android:nb_trade:4.0.0.2@aar'
+
+    // ut
+    implementation 'com.taobao.android:utdid4all:1.1.5.3_proguard'
+    implementation 'com.alibaba.mtl:app-monitor-sdk:2.6.4.5_for_bc'
+
+    // config
+    implementation 'com.taobao.android:securityguardaar3:5.4.171@aar'
+    implementation 'com.taobao.android:securitybodyaar3:5.4.99@aar'
+    implementation 'com.taobao.android:avmpaar3:5.4.36@aar'
+    implementation 'com.taobao.android:sgmiddletieraar3:5.4.9@aar'
+
+}

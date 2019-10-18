@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-kepler" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>cordovaPluginKepler</name>
+  <js-module name="cordovaPluginKepler" src="www/cordovaPluginKepler.js">
+    <clobbers target="kepler"/>
+  </js-module>
+
+  <preference name="APPKEY"/>
+  <preference name="APPSECRET"/>
+
+  <platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="cordovaPluginKepler">
+        <param name="android-package" value="com.mokoto.cordova.kepler.cordovaPluginKepler"/>
+      </feature>
+      <preference name="appkey" value="$APPKEY"/>
+      <preference name="appscret" value="$APPSECRET"/>
+    </config-file>
+    <config-file parent="/manifest/application" target="AndroidManifest.xml">
+      <activity android:name="com.kepler.jd.login.AuthSuccessActivity"
+                android:exported="true"
+                android:screenOrientation="portrait">
+      </activity>
+
+      <activity
+        android:name="com.kepler.jd.sdk.KeplerMidActivity"
+        android:screenOrientation="portrait"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+        android:windowSoftInputMode="adjustPan|stateHidden">
+
+      </activity>
+
+      <activity android:name="com.kepler.jd.sdk.WebViewActivity"
+                android:screenOrientation="portrait"/>
+
+    </config-file>
+
+    <edit-config file="AndroidManifest.xml"
+                 target="/manifest/application/activity[@android:name='com.kepler.jd.sdk.KeplerBackActivity']"
+                 mode="overwrite">
+      <activity
+        android:name="com.kepler.jd.sdk.KeplerBackActivity"
+        android:exported="true"
+        android:theme="@android:style/Theme.Translucent">
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW"/>
+          <category android:name="android.intent.category.DEFAULT"/>
+          <data android:scheme="sdkback$$APPKEY"/>
+        </intent-filter>
+      </activity>
+    </edit-config>
+    <config-file parent="/*" target="AndroidManifest.xml">
+      <uses-permission android:name="android.permission.INTERNET"/>
+      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+      <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    </config-file>
+    <source-file src="src/android/cordovaPluginKepler.java" target-dir="src/com/mokoto/cordova/kepler"/>
+    <source-file src="src/android/KeplerProxy.java" target-dir="src/com/mokoto/cordova/kepler"/>
+    <framework custom="true" src="src/android/kepler.gradle" type="gradleReference"/>
+    <framework custom="true" src="src/android/kepler"/>
+  </platform>
+  <platform name="ios">
+    <config-file parent="/*" target="config.xml">
+      <feature name="cordovaPluginKepler">
+        <param name="ios-package" value="cordovaPluginKepler"/>
+      </feature>
+    </config-file>
+    <source-file src="src/ios/cordovaPluginKepler.m"/>
+  </platform>
+</plugin>

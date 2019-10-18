@@ -1,0 +1,21 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.mokoto.baichuan"
+    },
+    "cordova-plugin-kepler": {
+      "PACKAGE_NAME": "com.mokoto.baichuan"
+    },
+    "cordova-plugin-baichuan": {
+      "PACKAGE_NAME": "com.mokoto.baichuan"
+    }
+  },
+  "dependent_plugins": {}
+}

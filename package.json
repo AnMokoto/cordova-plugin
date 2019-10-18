@@ -1,0 +1,35 @@
+{
+  "name": "com.mokoto.baichuan",
+  "displayName": "Baichuan",
+  "version": "1.0.0",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova-android": "^8.1.0",
+    "cordova-ios": "^5.0.1",
+    "cordova-plugin-baichuan": "file:cordovaPluginBaichuan",
+    "cordova-plugin-kepler": "file:cordovaPluginKepler"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-kepler": {},
+      "cordova-plugin-baichuan": {}
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "devDependencies": {
+    "cordova-plugin-whitelist": "^1.3.4"
+  }
+}
