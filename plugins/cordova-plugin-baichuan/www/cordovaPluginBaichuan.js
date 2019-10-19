@@ -3,12 +3,7 @@ const exec = require('cordova/exec')
 function $BaiChuan () {
   /**
    * 登录
-   * @param  success:
-   *     {
-   *         code:int,//0--登录初始化成功；1--登录初始化完成；2--登录成功
-   *         openId:string,
-   *         nickName:string
-   *     }
+   * @param  success: {Session}
    * @param  error:
    *     {
    *         code:int,

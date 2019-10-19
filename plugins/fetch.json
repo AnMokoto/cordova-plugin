@@ -18,7 +18,7 @@
   "cordova-plugin-baichuan": {
     "source": {
       "type": "local",
-      "path": "D:\\tsh\\js\\plugins\\Baichuan\\node_modules\\cordova-plugin-baichuan"
+      "path": "/Users/moo/js/cordova-plugin/cordova-plugin-baichuan/node_modules/cordova-plugin-baichuan"
     },
     "is_top_level": true,
     "variables": {}

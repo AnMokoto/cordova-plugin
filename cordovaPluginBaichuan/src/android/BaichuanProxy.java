@@ -39,8 +39,11 @@ public class BaichuanProxy {
 
     void initialize() {
         if (isInitialize) return;
-        String channelType = this.preferences.getString("baichuan_channel_type", null);
-        String channelName = this.preferences.getString("baichuan_channel_name", null);
+        String channelType = this.preferences.getString("CHANNEL_TYPE", null);
+        String channelName = this.preferences.getString("CHANNEL_NAME", null);
+        if(channelType!=null && channelName!=null){
+          AlibcTradeSDk.setChannel(channelType,channelName);
+        }
         AlibcTradeSDK.asyncInit(cordova.getActivity().getApplication(),
                 new AlibcTradeInitCallback() {
                     @Override
@@ -78,20 +81,13 @@ public class BaichuanProxy {
         } else if (action.startsWith("bcLogout")) {
             return this.logout(callbackContext);
         } else if (action.startsWith("bcSession")) {
-            return this.getSesstion(callbackContext);
+            return this.getSession(callbackContext);
         }
         return false;
     }
 
     /**
-     * success:
-     * <pre>
-     *     {
-     *         code:int,//0--登录初始化成功；1--登录初始化完成；2--登录成功
-     *         openId:string,
-     *         nickName:string
-     *     }
-     * </pre>
+     * success: Session
      * <p>
      * error:
      * <pre>
@@ -108,15 +104,16 @@ public class BaichuanProxy {
         alibcLogin.showLogin(new AlibcLoginCallback() {
             @Override
             public void onSuccess(int i, String s, String s1) {
-                JSONObject json = new JSONObject();
-                try {
-                    json.putOpt("code", i);
-                    json.putOpt("openId", s);
-                    json.putOpt("nickName", s1);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                callbackContext.success(json);
+//                 JSONObject json = new JSONObject();
+//                 try {
+//                     json.putOpt("code", i);
+//                     json.putOpt("openId", s);
+//                     json.putOpt("nickName", s1);
+//                 } catch (JSONException e) {
+//                     e.printStackTrace();
+//                 }
+//                 callbackContext.success(json);
+                getSession(callbackContext);
             }
 
             @Override
@@ -189,7 +186,7 @@ public class BaichuanProxy {
      *
      * @param callbackContext
      */
-    private boolean getSesstion(CallbackContext callbackContext) {
+    private boolean getSession(CallbackContext callbackContext) {
         Session session = AlibcLogin.getInstance().getSession();
         if (session != null) {
             callbackContext.success(session.toString());

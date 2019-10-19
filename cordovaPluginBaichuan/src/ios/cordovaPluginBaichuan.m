@@ -9,7 +9,11 @@
 
 -(void)pluginInitialize {
     [[AlibcTradeSDK sharedInstance] setDebugLogOpen:NO];
-    [[AlibcTradeSDK sharedInstance] setDebugLogOpen:NO];
+    NSString *type = [[self.commandDelegate settings] objectForKey:@"CHANNEL_TYPE"];
+    NSString *name = [[self.commandDelegate settings] objectForKey:@"CHANNEL_NAME"];
+    if(type!=nil && name !=nil){
+        [[AlibcTradeSDK sharedInstance] setChannel:type name:name];
+    }
     [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
         NSLog(@"Init success.");
     }failure:^(NSError *error) {
@@ -18,7 +22,7 @@
 }
 
 - (void)Login:(CDVInvokedUrlCommand *)command{
-    
+
     if([[ALBBSession sharedInstance] isLogin]){
         [self Session:command];
     }else{
@@ -29,7 +33,7 @@
             [self onLoginFailuer:command session:session error:error];
         }];
     }
-    
+
 }
 
 -(void)onLoginSuccess:(CDVInvokedUrlCommand *) command session:(ALBBSession *) session{
@@ -52,7 +56,7 @@
     if([session isLogin]){
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[session getUser] ALBBUserDescription] ]
                                     callbackId:command.callbackId];
-        
+
     }else{
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR] callbackId:command.callbackId];
     }
