@@ -12,7 +12,7 @@ function $BaiChuan () {
    * @constructor
    */
   this.Login = function (success, error) {
-    exec(success, error, 'cordovaPluginBaichuan', 'bcLogin', [])
+    exec(success, error, 'cordovaPluginBaichuan', 'Login', [])
   }
 
   /**
@@ -31,7 +31,7 @@ function $BaiChuan () {
    * @constructor
    */
   this.Logout = function (success, error) {
-    exec(success, error, 'cordovaPluginBaichuan', 'bcLogout', [])
+    exec(success, error, 'cordovaPluginBaichuan', 'Logout', [])
   }
   /**
    * 获取用户信息
@@ -50,7 +50,7 @@ function $BaiChuan () {
    * @constructor
    */
   this.Session = function (success, error) {
-    exec(success, error, 'cordovaPluginBaichuan', 'bcSession', [])
+    exec(success, error, 'cordovaPluginBaichuan', 'Session', [])
   }
 }
 

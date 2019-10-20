@@ -76,11 +76,11 @@ public class BaichuanProxy {
     }
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.startsWith("bcLogin")) {
+        if (action.startsWith("Login")) {
             return this.login(callbackContext);
-        } else if (action.startsWith("bcLogout")) {
+        } else if (action.startsWith("Logout")) {
             return this.logout(callbackContext);
-        } else if (action.startsWith("bcSession")) {
+        } else if (action.startsWith("Session")) {
             return this.getSession(callbackContext);
         }
         return false;
