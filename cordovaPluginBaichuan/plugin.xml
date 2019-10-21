@@ -49,7 +49,7 @@
           <key>CFBundleTypeRole</key>
           <string>Editor</string>
           <key>CFBundleURLName</key>
-          <string>baichuan</string>
+          <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
           <key>CFBundleURLSchemes</key>
           <array>
             <string>tbopen$APPKEY</string>
@@ -58,11 +58,11 @@
       </array>
     </config-file>
 
-    <framework src="CoreMotion.framework"/>
-    <framework src="CoreTelephony.framework"/>
-    <framework src="libsqlite3.tbd"/>
-    <framework src="libc++.tbd"/>
-    <framework src="libz.tbd"/>
+    <framework src="CoreMotion.framework" weak="true"/>
+    <framework src="CoreTelephony.framework" weak="true"/>
+    <framework src="libsqlite3.tbd" weak="true"/>
+    <framework src="libc++.tbd" weak="true"/>
+    <framework src="libz.tbd" weak="true"/>
 
     <podspec>
       <config>
@@ -83,6 +83,6 @@
     <header-file src="src/ios/cordovaPluginBaichuan.h"/>
     <source-file src="src/ios/cordovaPluginBaichuan.m"/>
     <hook type="before_plugin_install" src="hook/ios_after_plugin_install.js"/>
-<!--    <source-file src="src/ios/mtopsdk_configuration.plist" target-dir="../Resources"/>-->
+    <!--    <source-file src="src/ios/mtopsdk_configuration.plist" target-dir="../Resources"/>-->
   </platform>
 </plugin>

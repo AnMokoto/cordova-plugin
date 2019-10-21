@@ -6,13 +6,14 @@
     <clobbers target="kepler"/>
   </js-module>
 
-  <preference name="APPKEY"/>
-  <preference name="APPSECRET"/>
+  <!--  <preference name="APPKEY"/>-->
+  <!--  <preference name="APPSECRET"/>-->
 
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="cordovaPluginKepler">
         <param name="android-package" value="com.mokoto.cordova.kepler.cordovaPluginKepler"/>
+        <param name="onload" value="true"/>
       </feature>
       <preference name="appkey" value="$APPKEY"/>
       <preference name="appscret" value="$APPSECRET"/>
@@ -63,12 +64,61 @@
     <framework custom="true" src="src/android/kepler.gradle" type="gradleReference"/>
     <framework custom="true" src="src/android/kepler"/>
   </platform>
+
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
       <feature name="cordovaPluginKepler">
         <param name="ios-package" value="cordovaPluginKepler"/>
+        <param name="onload" value="true"/>
       </feature>
     </config-file>
+
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+      <array>
+        <string>jdlogin</string>
+        <string>openapp.jdmobile</string>
+        <string>weixin</string>
+      </array>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+      <array>
+        <dict>
+          <key>CFBundleTypeRole</key>
+          <string>Editor</string>
+          <key>CFBundleURLName</key>
+          <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>sdkback$APPKEY</string>
+          </array>
+        </dict>
+      </array>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+      <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string></string>
+        <key>NSCameraUsageDescription</key>
+        <string></string>
+      </dict>
+    </config-file>
+
+
+    <framework src="libsqlite3.tbd" weak="true"/>
+    <framework src="libz.tbd" weak="true"/>
+    <framework src="UIKit.framework" weak="true"/>
+    <framework src="Foundation.framework" weak="true"/>
+    <framework src="JavaScriptCore.framework" weak="true"/>
+    <framework src="SystemConfiguration.framework" weak="true"/>
+
+    <framework custom="true" src="src/ios/JDKeplerSDK.framework" weak="true"/>
+    <resource-file src="src/ios/Kepler.bundle"/>
+    <source-file src="src/ios/AppDelegate_cordovaPluginKepler.h"/>
+    <source-file src="src/ios/AppDelegate_cordovaPluginKepler.m"/>
     <source-file src="src/ios/cordovaPluginKepler.m"/>
   </platform>
 </plugin>
