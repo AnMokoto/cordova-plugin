@@ -1,6 +1,6 @@
 const exec = require('cordova/exec')
 
-function $BaiChuan () {
+function $BaiChuan() {
   /**
    * 登录
    * @param  success: {Session}
@@ -51,6 +51,9 @@ function $BaiChuan () {
    */
   this.Session = function (success, error) {
     exec(success, error, 'cordovaPluginBaichuan', 'Session', [])
+  }
+  this.IsLogin = function (success, error) {
+    exec(success, error, 'cordovaPluginBaichuan', 'IsLogin', [])
   }
 }
 

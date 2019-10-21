@@ -6,15 +6,14 @@ import android.util.Log;
 import com.ali.auth.third.core.model.Session;
 import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
 import com.alibaba.baichuan.android.trade.callback.AlibcTradeInitCallback;
-import com.alibaba.baichuan.trade.biz.core.taoke.AlibcTaokeParams;
 import com.alibaba.baichuan.trade.biz.login.AlibcLogin;
 import com.alibaba.baichuan.trade.biz.login.AlibcLoginCallback;
-import com.alibaba.baichuan.trade.common.AlibcTradeCommon;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaPreferences;
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,8 +40,8 @@ public class BaichuanProxy {
         if (isInitialize) return;
         String channelType = this.preferences.getString("CHANNEL_TYPE", null);
         String channelName = this.preferences.getString("CHANNEL_NAME", null);
-        if(channelType!=null && channelName!=null){
-          AlibcTradeSDk.setChannel(channelType,channelName);
+        if (channelType != null && channelName != null) {
+            AlibcTradeSDK.setChannel(channelType, channelName);
         }
         AlibcTradeSDK.asyncInit(cordova.getActivity().getApplication(),
                 new AlibcTradeInitCallback() {
@@ -50,13 +49,6 @@ public class BaichuanProxy {
                     public void onSuccess() {
                         isInitialize = true;
                         Log.i(TAG, "阿里百川初始化成功");
-                        if (channelName != null) {
-                            try {
-                                AlibcTradeSDK.setChannel(channelType, channelName);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
                     }
 
                     @Override
@@ -82,12 +74,23 @@ public class BaichuanProxy {
             return this.logout(callbackContext);
         } else if (action.startsWith("Session")) {
             return this.getSession(callbackContext);
+        } else if (action.startsWith("IsLogin")) {
+//            callbackContext.success(this.isLogin() ? 1 : 0);
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,this.isLogin()));
+            return true;
         }
         return false;
     }
 
     /**
-     * success: Session
+     * success:
+     * <pre>
+     *     {
+     *         code:int,//0--登录初始化成功；1--登录初始化完成；2--登录成功
+     *         openId:string,
+     *         nickName:string
+     *     }
+     * </pre>
      * <p>
      * error:
      * <pre>
@@ -100,20 +103,14 @@ public class BaichuanProxy {
      * @param callbackContext
      */
     private boolean login(CallbackContext callbackContext) {
+        if (this.isLogin()) {
+            return this.getSession(callbackContext);
+        }
         AlibcLogin alibcLogin = AlibcLogin.getInstance();
         alibcLogin.showLogin(new AlibcLoginCallback() {
             @Override
             public void onSuccess(int i, String s, String s1) {
-//                 JSONObject json = new JSONObject();
-//                 try {
-//                     json.putOpt("code", i);
-//                     json.putOpt("openId", s);
-//                     json.putOpt("nickName", s1);
-//                 } catch (JSONException e) {
-//                     e.printStackTrace();
-//                 }
-//                 callbackContext.success(json);
-                getSession(callbackContext);
+                BaichuanProxy.this.getSession(callbackContext);
             }
 
             @Override
@@ -152,6 +149,10 @@ public class BaichuanProxy {
      * @param callbackContext
      */
     private boolean logout(CallbackContext callbackContext) {
+        if(!this.isLogin()){
+            callbackContext.success();
+            return true;
+        }
         AlibcLogin alibcLogin = AlibcLogin.getInstance();
         alibcLogin.logout(new AlibcLoginCallback() {
             @Override
@@ -187,13 +188,17 @@ public class BaichuanProxy {
      * @param callbackContext
      */
     private boolean getSession(CallbackContext callbackContext) {
-        Session session = AlibcLogin.getInstance().getSession();
-        if (session != null) {
+        if (this.isLogin()) {
+            Session session = AlibcLogin.getInstance().getSession();
             callbackContext.success(session.toString());
         } else {
-            callbackContext.error("");
+            callbackContext.error(0);
         }
         return true;
+    }
+
+    private boolean isLogin() {
+        return AlibcLogin.getInstance().isLogin();
     }
 
 
