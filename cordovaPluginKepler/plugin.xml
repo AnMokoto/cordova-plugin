@@ -6,8 +6,8 @@
     <clobbers target="kepler"/>
   </js-module>
 
-  <!--  <preference name="APPKEY"/>-->
-  <!--  <preference name="APPSECRET"/>-->
+    <preference name="APPKEY"/>
+    <preference name="APPSECRET"/>
 
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
@@ -47,7 +47,7 @@
         <intent-filter>
           <action android:name="android.intent.action.VIEW"/>
           <category android:name="android.intent.category.DEFAULT"/>
-          <data android:scheme="sdkback$$APPKEY"/>
+          <data android:scheme="sdkback$APPKEY"/>
         </intent-filter>
       </activity>
     </edit-config>
@@ -117,8 +117,8 @@
 
     <framework custom="true" src="src/ios/JDKeplerSDK.framework" weak="true"/>
     <resource-file src="src/ios/Kepler.bundle"/>
-    <source-file src="src/ios/AppDelegate_cordovaPluginKepler.h"/>
-    <source-file src="src/ios/AppDelegate_cordovaPluginKepler.m"/>
+    <source-file src="src/ios/AppDelegate+cordovaPluginKepler.h"/>
+    <source-file src="src/ios/AppDelegate+cordovaPluginKepler.m"/>
     <source-file src="src/ios/cordovaPluginKepler.m"/>
   </platform>
 </plugin>
