@@ -11,7 +11,9 @@
     [[AlibcTradeSDK sharedInstance] setDebugLogOpen:NO];
     NSString *type = [[self.commandDelegate settings] objectForKey:@"CHANNEL_TYPE"];
     NSString *name = [[self.commandDelegate settings] objectForKey:@"CHANNEL_NAME"];
-    if(type!=nil && name !=nil){
+    if([type isEqualToString:@"0"]){
+        [[AlibcTradeSDK sharedInstance] setChannel:@"0" name:nil];
+    }else{
         [[AlibcTradeSDK sharedInstance] setChannel:type name:name];
     }
     [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{

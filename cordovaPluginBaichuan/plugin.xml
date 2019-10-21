@@ -5,8 +5,8 @@
   <js-module name="cordovaPluginBaichuan" src="www/cordovaPluginBaichuan.js">
     <clobbers target="BC"/>
   </js-module>
-  <preference name="CHANNEL_NAME" />
-  <preference name="CHANNEL_TYPE" />
+  <preference name="CHANNEL_NAME" default="0"/>
+  <preference name="CHANNEL_TYPE" default=""/>
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="cordovaPluginBaichuan">
