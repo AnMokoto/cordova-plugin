@@ -47,13 +47,18 @@
 
 - (void)Logout:(CDVInvokedUrlCommand *)command{
     if ([self isLogin]) {
-        [[ ALBBSDK sharedInstance] logout];
+        [[ ALBBSDK sharedInstance] logoutWithCallback:^{
+            NSLog(@"ALBBSDK logoutWithCallback");
+        }];
     }
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 - (void)Session:(CDVInvokedUrlCommand *)command{
     if([self isLogin]){
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[[ALBBSession sharedInstance] getUser] ALBBUserDescription] ]
+        NSData *data = [NSJSONSerialization dataWithJSONObject:[[ALBBSession sharedInstance] getUser]
+                                                       options:kNilOptions
+                                                         error:nil];
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]]
                                     callbackId:command.callbackId];
 
     }else{
