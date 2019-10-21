@@ -40,7 +40,9 @@ public class BaichuanProxy {
         if (isInitialize) return;
         String channelType = this.preferences.getString("CHANNEL_TYPE", null);
         String channelName = this.preferences.getString("CHANNEL_NAME", null);
-        if (channelType != null && channelName != null) {
+        if (channelType.equalsIgnoreCase("0")) {
+            AlibcTradeSDK.setChannel("0", null);
+        } else {
             AlibcTradeSDK.setChannel(channelType, channelName);
         }
         AlibcTradeSDK.asyncInit(cordova.getActivity().getApplication(),
