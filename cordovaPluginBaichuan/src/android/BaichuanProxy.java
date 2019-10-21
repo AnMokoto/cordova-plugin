@@ -8,6 +8,7 @@ import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
 import com.alibaba.baichuan.android.trade.callback.AlibcTradeInitCallback;
 import com.alibaba.baichuan.trade.biz.login.AlibcLogin;
 import com.alibaba.baichuan.trade.biz.login.AlibcLoginCallback;
+import com.alibaba.fastjson.JSON;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -16,7 +17,6 @@ import org.apache.cordova.CordovaPreferences;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * 处理百川sdk业务
@@ -76,7 +76,7 @@ public class BaichuanProxy {
             return this.getSession(callbackContext);
         } else if (action.startsWith("IsLogin")) {
 //            callbackContext.success(this.isLogin() ? 1 : 0);
-            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,this.isLogin()));
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, this.isLogin()));
             return true;
         }
         return false;
@@ -115,14 +115,10 @@ public class BaichuanProxy {
 
             @Override
             public void onFailure(int i, String s) {
-                JSONObject json = new JSONObject();
-                try {
-                    json.putOpt("code", i);
-                    json.putOpt("message", s);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                callbackContext.error(json);
+                com.alibaba.fastjson.JSONObject obj = new com.alibaba.fastjson.JSONObject();
+                obj.put("code", i);
+                obj.put("message", s);
+                callbackContext.error(obj.toJSONString());
             }
         });
 
@@ -149,7 +145,7 @@ public class BaichuanProxy {
      * @param callbackContext
      */
     private boolean logout(CallbackContext callbackContext) {
-        if(!this.isLogin()){
+        if (!this.isLogin()) {
             callbackContext.success();
             return true;
         }
@@ -157,26 +153,18 @@ public class BaichuanProxy {
         alibcLogin.logout(new AlibcLoginCallback() {
             @Override
             public void onSuccess(int i, String s, String s1) {
-                JSONObject json = new JSONObject();
-                try {
-                    json.putOpt("code", i);
-                    json.putOpt("openId", s);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                callbackContext.success(json);
+                com.alibaba.fastjson.JSONObject obj = new com.alibaba.fastjson.JSONObject();
+                obj.put("code", i);
+                obj.put("openId", s);
+                callbackContext.success(obj.toJSONString());
             }
 
             @Override
             public void onFailure(int i, String s) {
-                JSONObject json = new JSONObject();
-                try {
-                    json.putOpt("code", i);
-                    json.putOpt("message", s);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                callbackContext.error(json);
+                com.alibaba.fastjson.JSONObject obj = new com.alibaba.fastjson.JSONObject();
+                obj.put("code", i);
+                obj.put("message", s);
+                callbackContext.error(obj.toJSONString());
             }
         });
         return true;
@@ -190,7 +178,7 @@ public class BaichuanProxy {
     private boolean getSession(CallbackContext callbackContext) {
         if (this.isLogin()) {
             Session session = AlibcLogin.getInstance().getSession();
-            callbackContext.success(session.toString());
+            callbackContext.success(JSON.toJSONString(session));
         } else {
             callbackContext.error(0);
         }

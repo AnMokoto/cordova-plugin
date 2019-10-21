@@ -5,8 +5,8 @@
   <js-module name="cordovaPluginBaichuan" src="www/cordovaPluginBaichuan.js">
     <clobbers target="BC"/>
   </js-module>
-  <preference name="CHANNEL_NAME" default="cordova-plugin-baichuan"/>
-  <preference name="CHANNEL_TYPE" default="cordova-plugin-baichuan"/>
+  <preference name="CHANNEL_NAME" />
+  <preference name="CHANNEL_TYPE" />
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="cordovaPluginBaichuan">
@@ -75,7 +75,7 @@
         <pod name="securityGuard" spec="5.4.173"/>
         <pod name="AliLinkPartnerSDK" spec="2.0.0.0"/>
         <pod name="BCUserTrack" spec="5.2.0.1-appkeys"/>
-        <pod name="UTDID" spec="~>1.1.0.16"/>
+        <pod name="UTDID" spec="1.1.0.16"/>
       </pods>
     </podspec>
     <header-file src="src/ios/AppDelegate+cordovaPluginBaichuan.h"/>
