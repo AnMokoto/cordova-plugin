@@ -9,7 +9,7 @@
 
 @interface cordovaPluginBaichuan : CDVPlugin
 // Member variables go here.
-
+@property (atomic,assign) BOOL isInitial;
 /** 登录 */
 - (void)Login:(CDVInvokedUrlCommand*)command;
 /** 注销 */

@@ -52,6 +52,13 @@ function $BaiChuan() {
   this.Session = function (success, error) {
     exec(success, error, 'cordovaPluginBaichuan', 'Session', [])
   }
+
+  /**
+   *
+   * @param success true already log in or else.
+   * @param error ignore
+   * @constructor
+   */
   this.IsLogin = function (success, error) {
     exec(success, error, 'cordovaPluginBaichuan', 'IsLogin', [])
   }

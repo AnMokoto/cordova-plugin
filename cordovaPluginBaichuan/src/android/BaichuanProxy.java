@@ -38,9 +38,9 @@ public class BaichuanProxy {
 
     void initialize() {
         if (isInitialize) return;
-        String channelType = this.preferences.getString("CHANNEL_TYPE", null);
-        String channelName = this.preferences.getString("CHANNEL_NAME", null);
-        if (channelType.equalsIgnoreCase("0")) {
+        String channelType = this.preferences.getString("channel_type", null);
+        String channelName = this.preferences.getString("channel_name", null);
+        if (channelType.equalsIgnoreCase("0") || channelType == null) {
             AlibcTradeSDK.setChannel("0", null);
         } else {
             AlibcTradeSDK.setChannel(channelType, channelName);

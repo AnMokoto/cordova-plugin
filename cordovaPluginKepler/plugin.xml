@@ -6,8 +6,8 @@
     <clobbers target="kepler"/>
   </js-module>
 
-    <preference name="APPKEY"/>
-    <preference name="APPSECRET"/>
+  <preference name="APPKEY"/>
+  <preference name="APPSECRET"/>
 
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
@@ -71,6 +71,8 @@
         <param name="ios-package" value="cordovaPluginKepler"/>
         <param name="onload" value="true"/>
       </feature>
+      <preference name="appkey" value="$APPKEY"/>
+      <preference name="appscret" value="$APPSECRET"/>
     </config-file>
 
     <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
@@ -114,6 +116,15 @@
     <framework src="Foundation.framework" weak="true"/>
     <framework src="JavaScriptCore.framework" weak="true"/>
     <framework src="SystemConfiguration.framework" weak="true"/>
+
+    <!--    <framework src="Toast" type="podspec" spec="~>4.0.0"/>-->
+    <podspec>
+      <config>
+      </config>
+      <pods>
+        <pod name="Toast" tag="4.0.0" git="https://github.com/scalessec/Toast.git"/>
+      </pods>
+    </podspec>
 
     <framework custom="true" src="src/ios/JDKeplerSDK.framework" weak="true"/>
     <resource-file src="src/ios/Kepler.bundle"/>

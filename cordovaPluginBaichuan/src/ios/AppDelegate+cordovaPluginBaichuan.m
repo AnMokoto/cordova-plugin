@@ -5,7 +5,7 @@
 //  Created by Moo on 2019/10/19.
 //
 #import "AppDelegate.h"
-#import "AppDelegate_cordovaPluginBaichuan.h"
+#import "AppDelegate+cordovaPluginBaichuan.h"
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 
 @implementation AppDelegate (cordovaPluginBaichuan)
@@ -17,7 +17,7 @@
         // 处理其他app跳转到本app
     }
     return YES;
-    
+
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{

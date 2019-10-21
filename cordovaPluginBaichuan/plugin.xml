@@ -5,14 +5,22 @@
   <js-module name="cordovaPluginBaichuan" src="www/cordovaPluginBaichuan.js">
     <clobbers target="BC"/>
   </js-module>
+  <!-- first -->
+  <preference name="CHANNEL_TYPE" default="0"/>
+  <!--  second -->
   <preference name="CHANNEL_NAME" default="0"/>
-  <preference name="CHANNEL_TYPE" default=""/>
+  <preference name="APPKEY"/>
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="cordovaPluginBaichuan">
         <param name="onload" value="true"/>
         <param name="android-package" value="com.mokoto.cordova.baichuan.cordovaPluginBaichuan"/>
       </feature>
+      <!-- first -->
+      <preference name="CHANNEL_TYPE" value="$CHANNEL_TYPE"/>
+      <!--  second -->
+      <preference name="CHANNEL_NAME" value="$CHANNEL_NAME"/>
+      <!--      <preference name="APPKEY" value="$APPKEY"/>-->
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml">
 
@@ -22,12 +30,16 @@
     <framework custom="true" src="src/android/baichuan.gradle" type="gradleReference"/>
   </platform>
   <platform name="ios">
-    <preference name="APPKEY"/>
     <config-file parent="/*" target="config.xml">
       <feature name="cordovaPluginBaichuan">
         <param name="ios-package" value="cordovaPluginBaichuan"/>
         <param name="onload" value="true"/>
       </feature>
+      <!-- first -->
+      <preference name="CHANNEL_TYPE" value="$CHANNEL_TYPE"/>
+      <!--  second -->
+      <preference name="CHANNEL_NAME" value="$CHANNEL_NAME"/>
+      <preference name="APPKEY" value="$APPKEY"/>
     </config-file>
     <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
       <dict>
@@ -69,20 +81,21 @@
         <source url="http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git"/>
       </config>
       <pods>
-        <pod name="AlibcTradeSDK" spec="4.0.0.2"/>
+        <pod name="AlibcTradeSDK" spec="4.0.0.5"/>
         <pod name="AliAuthSDK" spec="2.0.0.3"/>
         <pod name="mtopSDK" spec="3.0.0.4"/>
         <pod name="securityGuard" spec="5.4.173"/>
         <pod name="AliLinkPartnerSDK" spec="2.0.0.0"/>
         <pod name="BCUserTrack" spec="5.2.0.1-appkeys"/>
         <pod name="UTDID" spec="1.1.0.16"/>
+        <pod name="Toast" tag="4.0.0" git="https://github.com/scalessec/Toast.git"/>
       </pods>
     </podspec>
     <header-file src="src/ios/AppDelegate+cordovaPluginBaichuan.h"/>
     <source-file src="src/ios/AppDelegate+cordovaPluginBaichuan.m"/>
     <header-file src="src/ios/cordovaPluginBaichuan.h"/>
     <source-file src="src/ios/cordovaPluginBaichuan.m"/>
-<!--    <hook type="before_plugin_install" src="hook/ios_after_plugin_install.js"/>-->
+    <!--    <hook type="before_plugin_install" src="hook/ios_after_plugin_install.js"/>-->
     <resource-file src="src/ios/mtopsdk_configuration.plist"/>
     <!--    <source-file src="src/ios/mtopsdk_configuration.plist" target-dir="../Resources"/>-->
   </platform>

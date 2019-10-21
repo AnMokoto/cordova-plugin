@@ -2,13 +2,13 @@
 
 #import <Cordova/CDV.h>
 #import "JDKeplerSDK.framework/Headers/KeplerApiManager.h"
+#import <Toast/UIView+Toast.h>
 
 typedef void (^Callback)(void);
 
-@interface cordovaPluginKepler : CDVPlugin {
+@interface cordovaPluginKepler : CDVPlugin
     // Member variables go here.
-}
-- (void)pluginInitialize；
+@property (atomic,assign) BOOL isInitial;
 - (void)keplerLogin:(CDVInvokedUrlCommand*)command;
 - (void)keplerLogout:(CDVInvokedUrlCommand*)command;
 - (void)keplerIsLogin:(CDVInvokedUrlCommand*)command;
@@ -16,17 +16,24 @@ typedef void (^Callback)(void);
 
 
 @implementation cordovaPluginKepler
-
+#pragma mark "API"
 - (void)pluginInitialize{
-    NSString *APPKEY = [[self.commandDelegate settings] objectForKey:@"APPKEY"];
-    NSString *APPSECRET = [[self.commandDelegate settings] objectForKey:@"APPSECRET"];
+    NSString *APPKEY = [[self.commandDelegate settings] objectForKey:@"appkey"];
+    NSString *APPSECRET = [[self.commandDelegate settings] objectForKey:@"appsecret"];
     [[KeplerApiManager sharedKPService] asyncInitSdk:APPKEY
                                            secretKey:APPSECRET
                                       sucessCallback:^{
+                                      [self setIsInitial:YES];
                                           NSLog(@"Kepler init success");
                                       }
                                       failedCallback:^(NSError *error) {
-                                          NSLog(@"Kepler init failed --> %@",error);
+                                      [self setIsInitial:NO];
+                                      dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [self.viewController.view makeToast:[[NSString alloc] initWithFormat:@"京东开普勒初始化失败%ld",error.code]
+                                                                             duration:2.0
+                                                                             position:CSToastPositionCenter];
+                                              });
+                                          NSLog(@"Kepler init failed 京东开普勒初始化失败--> %@",error);
                                       }];
 }
 

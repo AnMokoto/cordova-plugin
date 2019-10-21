@@ -4,23 +4,39 @@
 #import "cordovaPluginBaichuan.h"
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
 #import <AlibabaAuthSDK/ALBBSDK.h>
+#import <Toast/UIView+Toast.h>
 
 @implementation cordovaPluginBaichuan
 
+#pragma mark "API"
 -(void)pluginInitialize {
-    [[AlibcTradeSDK sharedInstance] setDebugLogOpen:NO];
-    NSString *type = [[self.commandDelegate settings] objectForKey:@"CHANNEL_TYPE"];
-    NSString *name = [[self.commandDelegate settings] objectForKey:@"CHANNEL_NAME"];
-    if([type isEqualToString:@"0"]){
+
+    [[AlibcTradeSDK sharedInstance] setDebugLogOpen:YES];
+
+    [[AlibcTradeSDK sharedInstance] setIsvVersion:@"2.2.2"];
+//    [[AlibcTradeSDK sharedInstance] setIsvAppName:@"cordova-plugin-baichuan"];
+
+    NSString *type = [[self.commandDelegate settings] objectForKey:@"channel_type"];
+    NSString *name = [[self.commandDelegate settings] objectForKey:@"channel_name"];
+
+    if([type isEqualToString:@"0"] || type == nil){
         [[AlibcTradeSDK sharedInstance] setChannel:@"0" name:nil];
     }else{
         [[AlibcTradeSDK sharedInstance] setChannel:type name:name];
     }
     [[AlibcTradeSDK sharedInstance] asyncInitWithSuccess:^{
+        [self setIsInitial:YES];
         NSLog(@"Init success.");
     }failure:^(NSError *error) {
-        NSLog(@"Init failed: %@", error.description);
+        [self setIsInitial:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.viewController.view makeToast:[[NSString alloc] initWithFormat:@"阿里百川初始化失败%ld",error.code]
+                                       duration:2.0
+                                       position:CSToastPositionCenter];
+        });
+        NSLog(@"Init failed: 阿里百川初始化失败%@", error);
     }];
+
 }
 
 - (void)Login:(CDVInvokedUrlCommand *)command{
@@ -29,10 +45,14 @@
         [self Session:command];
     }else{
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
-        [[ALBBSDK sharedInstance] auth:[self viewController] successCallback:^(ALBBSession *session){
-            [self onLoginSuccess:command session:session];
-        } failureCallback:^(ALBBSession *session, NSError *error) {
-            [self onLoginFailuer:command session:session error:error];
+        [self.commandDelegate runInBackground:^{
+
+            [[ALBBSDK sharedInstance] auth:[self viewController] successCallback:^(ALBBSession *session){
+                [self onLoginSuccess:command session:session];
+            } failureCallback:^(ALBBSession *session, NSError *error) {
+                [self onLoginFailuer:command session:session error:error];
+            }];
+
         }];
     }
 

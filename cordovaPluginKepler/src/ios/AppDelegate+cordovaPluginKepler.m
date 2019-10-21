@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-#import "AppDelegate_cordovaPluginKepler.h"
+#import "AppDelegate+cordovaPluginKepler.h"
 #import "JDKeplerSDK.framework/Headers/KeplerApiManager.h"
 @implementation AppDelegate (cordovaPluginKepler)
 
