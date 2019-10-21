@@ -26,14 +26,14 @@ function $Kepler() {
     exec(success, error, 'cordovaPluginKepler', 'keplerLogout', [])
   }
   /**
-   * 获取用户信息
-   * @param success:
+   * 获取用户状态
+   * @param success: 已登录
 
-   * @param error
+   * @param error 未登录
    * @constructor
    */
-  this.Session = function (success, error) {
-    exec(success, error, 'cordovaPluginKepler', 'keplerSession', [])
+  this.IsLogin = function (success, error) {
+    exec(success, error, 'cordovaPluginKepler', 'keplerIsLogin', [])
   }
 }
 

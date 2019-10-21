@@ -23,7 +23,7 @@
 
 - (void)Login:(CDVInvokedUrlCommand *)command{
 
-    if([[ALBBSession sharedInstance] isLogin]){
+    if([self isLogin]){
         [self Session:command];
     }else{
         [[ALBBSDK sharedInstance] setAuthOption:NormalAuth];
@@ -46,20 +46,30 @@
 }
 
 - (void)Logout:(CDVInvokedUrlCommand *)command{
-    if ([[ALBBSession sharedInstance] isLogin]) {
+    if ([self isLogin]) {
         [[ ALBBSDK sharedInstance] logout];
     }
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 - (void)Session:(CDVInvokedUrlCommand *)command{
-    ALBBSession *session = [ALBBSession sharedInstance];
-    if([session isLogin]){
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[session getUser] ALBBUserDescription] ]
+    if([self isLogin]){
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[[ALBBSession sharedInstance] getUser] ALBBUserDescription] ]
                                     callbackId:command.callbackId];
 
     }else{
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR] callbackId:command.callbackId];
     }
+}
+
+- (void)IsLogin:(CDVInvokedUrlCommand *)command
+{
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                               messageAsBool:[self isLogin]]
+                                callbackId:command.callbackId];
+}
+
+-(BOOL) isLogin{
+    return [[ALBBSession sharedInstance] isLogin];
 }
 
 //- (void)coolMethod:(CDVInvokedUrlCommand*)command

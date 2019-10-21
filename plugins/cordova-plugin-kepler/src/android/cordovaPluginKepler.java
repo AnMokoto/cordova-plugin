@@ -21,7 +21,7 @@ public class cordovaPluginKepler extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         if (proxy == null)
-            proxy = new BaichuanProxy(this, this.cordova, this.preferences);
+            proxy = new KeplerProxy(this, this.cordova, this.preferences);
         proxy.initialize();
     }
 
