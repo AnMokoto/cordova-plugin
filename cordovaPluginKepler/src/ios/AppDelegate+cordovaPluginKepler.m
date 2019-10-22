@@ -1,7 +1,15 @@
 #import "AppDelegate.h"
 #import "AppDelegate+cordovaPluginKepler.h"
 #import "JDKeplerSDK.framework/Headers/KeplerApiManager.h"
+
 @implementation AppDelegate (cordovaPluginKepler)
+
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    return [[KeplerApiManager sharedKPService] handleOpenURL:url];
+}
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -10,10 +18,6 @@
 {
     return [[KeplerApiManager sharedKPService] handleOpenURL:url];
 }
-- (BOOL)application:(UIApplication *)app
-            openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
-{
-    return [[KeplerApiManager sharedKPService] handleOpenURL:url];
-}
+
+
 @end

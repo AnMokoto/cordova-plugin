@@ -1,0 +1,3 @@
+dependencies {
+    implementation project(':cordova-plugin-b-k:kepler')
+}

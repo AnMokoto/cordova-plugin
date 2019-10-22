@@ -42,8 +42,8 @@ public class KeplerProxy {
 
     void initialize() {
         if (isInitialize) return;
-        String appKey = this.preferences.getString("appkey", null);
-        String appSecret = this.preferences.getString("appsecret", null);
+        String appKey = this.preferences.getString("kepler_appkey", null);
+        String appSecret = this.preferences.getString("kepler_appsecret", null);
         KeplerApiManager.asyncInitSdk(cordova.getActivity().getApplication(),
                 appKey, appSecret,
                 new AsyncInitListener() {

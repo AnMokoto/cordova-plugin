@@ -18,8 +18,8 @@ typedef void (^Callback)(void);
 @implementation cordovaPluginKepler
 #pragma mark "API"
 - (void)pluginInitialize{
-    NSString *APPKEY = [[self.commandDelegate settings] objectForKey:@"appkey"];
-    NSString *APPSECRET = [[self.commandDelegate settings] objectForKey:@"appsecret"];
+    NSString *APPKEY = [[self.commandDelegate settings] objectForKey:@"kepler_appkey"];
+    NSString *APPSECRET = [[self.commandDelegate settings] objectForKey:@"kepler_appsecret"];
     [[KeplerApiManager sharedKPService] asyncInitSdk:APPKEY
                                            secretKey:APPSECRET
                                       sucessCallback:^{

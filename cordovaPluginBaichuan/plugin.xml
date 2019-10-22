@@ -5,21 +5,13 @@
   <js-module name="cordovaPluginBaichuan" src="www/cordovaPluginBaichuan.js">
     <clobbers target="BC"/>
   </js-module>
-  <!-- first -->
-  <preference name="CHANNEL_TYPE" default="0"/>
-  <!--  second -->
-  <preference name="CHANNEL_NAME" default="0"/>
-  <preference name="APPKEY"/>
+  <preference name="BAICHUAN_APPKEY"/>
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="cordovaPluginBaichuan">
         <param name="onload" value="true"/>
         <param name="android-package" value="com.mokoto.cordova.baichuan.cordovaPluginBaichuan"/>
       </feature>
-      <!-- first -->
-      <preference name="CHANNEL_TYPE" value="$CHANNEL_TYPE"/>
-      <!--  second -->
-      <preference name="CHANNEL_NAME" value="$CHANNEL_NAME"/>
       <!--      <preference name="APPKEY" value="$APPKEY"/>-->
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml">
@@ -35,11 +27,7 @@
         <param name="ios-package" value="cordovaPluginBaichuan"/>
         <param name="onload" value="true"/>
       </feature>
-      <!-- first -->
-      <preference name="CHANNEL_TYPE" value="$CHANNEL_TYPE"/>
-      <!--  second -->
-      <preference name="CHANNEL_NAME" value="$CHANNEL_NAME"/>
-      <preference name="APPKEY" value="$APPKEY"/>
+      <preference name="BAICHUAN_APPKEY" value="$BAICHUAN_APPKEY"/>
     </config-file>
     <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
       <dict>
@@ -64,7 +52,7 @@
           <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
           <key>CFBundleURLSchemes</key>
           <array>
-            <string>tbopen$APPKEY</string>
+            <string>tbopen$BAICHUAN_APPKEY</string>
           </array>
         </dict>
       </array>

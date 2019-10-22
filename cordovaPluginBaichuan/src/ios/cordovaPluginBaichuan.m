@@ -16,8 +16,8 @@
     [[AlibcTradeSDK sharedInstance] setIsvVersion:@"2.2.2"];
     //    [[AlibcTradeSDK sharedInstance] setIsvAppName:@"cordova-plugin-baichuan"];
 
-    NSString *type = [[self.commandDelegate settings] objectForKey:@"channel_type"];
-    NSString *name = [[self.commandDelegate settings] objectForKey:@"channel_name"];
+    NSString *type = [[self.commandDelegate settings] objectForKey:@"baichuan_channel_type"];
+    NSString *name = [[self.commandDelegate settings] objectForKey:@"baichuan_channel_name"];
 
     if([type isEqualToString:@"0"] || type == nil){
         [[AlibcTradeSDK sharedInstance] setChannel:@"0" name:nil];

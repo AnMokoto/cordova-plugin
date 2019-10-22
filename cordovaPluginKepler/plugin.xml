@@ -6,8 +6,8 @@
     <clobbers target="Kepler"/>
   </js-module>
 
-  <preference name="APPKEY"/>
-  <preference name="APPSECRET"/>
+  <preference name="KEPLER_APPKEY"/>
+  <preference name="KEPLER_APPSECRET"/>
 
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
@@ -15,8 +15,8 @@
         <param name="android-package" value="com.mokoto.cordova.kepler.cordovaPluginKepler"/>
         <param name="onload" value="true"/>
       </feature>
-      <preference name="appkey" value="$APPKEY"/>
-      <preference name="appscret" value="$APPSECRET"/>
+      <preference name="KEPLER_APPKEY" value="$KEPLER_APPKEY"/>
+      <preference name="KEPLER_APPSECRET" value="$KEPLER_APPSECRET"/>
     </config-file>
     <config-file parent="/manifest/application" target="AndroidManifest.xml">
       <activity android:name="com.kepler.jd.login.AuthSuccessActivity"
@@ -34,12 +34,6 @@
 
       <activity android:name="com.kepler.jd.sdk.WebViewActivity"
                 android:screenOrientation="portrait"/>
-
-    </config-file>
-
-    <edit-config file="AndroidManifest.xml"
-                 target="/manifest/application/activity[@android:name='com.kepler.jd.sdk.KeplerBackActivity']"
-                 mode="overwrite">
       <activity
         android:name="com.kepler.jd.sdk.KeplerBackActivity"
         android:exported="true"
@@ -47,10 +41,11 @@
         <intent-filter>
           <action android:name="android.intent.action.VIEW"/>
           <category android:name="android.intent.category.DEFAULT"/>
-          <data android:scheme="sdkback$APPKEY"/>
+          <data android:scheme="sdkback$KEPLER_APPKEY"/>
         </intent-filter>
       </activity>
-    </edit-config>
+    </config-file>
+
     <config-file parent="/*" target="AndroidManifest.xml">
       <uses-permission android:name="android.permission.INTERNET"/>
       <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -71,8 +66,8 @@
         <param name="ios-package" value="cordovaPluginKepler"/>
         <param name="onload" value="true"/>
       </feature>
-      <preference name="appkey" value="$APPKEY"/>
-      <preference name="appscret" value="$APPSECRET"/>
+      <preference name="KEPLER_APPKEY" value="$KEPLER_APPKEY"/>
+      <preference name="KEPLER_APPSECRET" value="$KEPLER_APPSECRET"/>
     </config-file>
 
     <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
@@ -92,7 +87,7 @@
           <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
           <key>CFBundleURLSchemes</key>
           <array>
-            <string>sdkback$APPKEY</string>
+            <string>sdkback$KEPLER_APPKEY</string>
           </array>
         </dict>
       </array>
@@ -103,9 +98,9 @@
         <key>NSAllowsArbitraryLoads</key>
         <true/>
         <key>NSPhotoLibraryUsageDescription</key>
-        <string></string>
+        <string>访问相册</string>
         <key>NSCameraUsageDescription</key>
-        <string></string>
+        <string>访问照相机</string>
       </dict>
     </config-file>
 

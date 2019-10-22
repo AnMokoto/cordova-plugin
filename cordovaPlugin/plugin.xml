@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-b-k" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>cordova-plugin-b-k</name>
+  <js-module name="cordovaPluginBaichuan" src="www/cordovaPluginBaichuan.js">
+    <clobbers target="BC"/>
+  </js-module>
+  <js-module name="cordovaPluginKepler" src="www/cordovaPluginKepler.js">
+    <clobbers target="Kepler"/>
+  </js-module>
+  <preference name="BAICHUAN_APPKEY"/>
+
+  <preference name="KEPLER_APPKEY"/>
+  <preference name="KEPLER_APPSECRET"/>
+
+  <platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="cordovaPluginBaichuan">
+        <param name="android-package" value="com.mokoto.cordova.baichuan.cordovaPluginBaichuan"/>
+        <param name="onload" value="true"/>
+      </feature>
+      <feature name="cordovaPluginKepler">
+        <param name="android-package" value="com.mokoto.cordova.kepler.cordovaPluginKepler"/>
+        <param name="onload" value="true"/>
+      </feature>
+      <preference name="KEPLER_APPKEY" value="$KEPLER_APPKEY"/>
+      <preference name="KEPLER_APPSECRET" value="$KEPLER_APPSECRET"/>
+    </config-file>
+    <config-file parent="/manifest/application" target="AndroidManifest.xml">
+      <activity android:name="com.kepler.jd.login.AuthSuccessActivity"
+                android:exported="true"
+                android:screenOrientation="portrait">
+      </activity>
+
+      <activity
+        android:name="com.kepler.jd.sdk.KeplerMidActivity"
+        android:screenOrientation="portrait"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+        android:windowSoftInputMode="adjustPan|stateHidden">
+
+      </activity>
+
+      <activity android:name="com.kepler.jd.sdk.WebViewActivity"
+                android:screenOrientation="portrait"/>
+      <activity
+        android:name="com.kepler.jd.sdk.KeplerBackActivity"
+        android:exported="true"
+        android:theme="@android:style/Theme.Translucent">
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW"/>
+          <category android:name="android.intent.category.DEFAULT"/>
+          <data android:scheme="sdkback$KEPLER_APPKEY"/>
+        </intent-filter>
+      </activity>
+    </config-file>
+    <config-file parent="/*" target="AndroidManifest.xml">
+      <uses-permission android:name="android.permission.INTERNET"/>
+      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+      <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    </config-file>
+    <source-file src="src/android/cordovaPluginBaichuan.java" target-dir="src/com/mokoto/cordova/baichuan"/>
+    <source-file src="src/android/BaichuanProxy.java" target-dir="src/com/mokoto/cordova/baichuan"/>
+    <framework custom="true" src="src/android/baichuan.gradle" type="gradleReference"/>
+    <source-file src="src/android/cordovaPluginKepler.java" target-dir="src/com/mokoto/cordova/kepler"/>
+    <source-file src="src/android/KeplerProxy.java" target-dir="src/com/mokoto/cordova/kepler"/>
+    <framework custom="true" src="src/android/kepler.gradle" type="gradleReference"/>
+    <framework custom="true" src="src/android/kepler"/>
+  </platform>
+  <platform name="ios">
+    <config-file parent="/*" target="config.xml">
+      <feature name="cordovaPluginBaichuan">
+        <param name="ios-package" value="cordovaPluginBaichuan"/>
+        <param name="onload" value="true"/>
+      </feature>
+      <feature name="cordovaPluginKepler">
+        <param name="ios-package" value="cordovaPluginKepler"/>
+        <param name="onload" value="true"/>
+      </feature>
+      <preference name="BAICHUAN_APPKEY" value="$BAICHUAN_APPKEY"/>
+      <preference name="KEPLER_APPKEY" value="$KEPLER_APPKEY"/>
+      <preference name="KEPLER_APPSECRET" value="$KEPLER_APPSECRET"/>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+      <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>访问相册</string>
+        <key>NSCameraUsageDescription</key>
+        <string>访问照相机</string>
+      </dict>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+      <array>
+        <string>tbopen</string>
+        <string>tmall</string>
+        <string>jdlogin</string>
+        <string>openapp.jdmobile</string>
+        <string>weixin</string>
+      </array>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+      <array>
+        <dict>
+          <key>CFBundleTypeRole</key>
+          <string>Editor</string>
+          <key>CFBundleURLName</key>
+          <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>tbopen$BAICHUAN_APPKEY</string>
+          </array>
+        </dict>
+        <dict>
+          <key>CFBundleTypeRole</key>
+          <string>Editor</string>
+          <key>CFBundleURLName</key>
+          <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>sdkback$KEPLER_APPKEY</string>
+          </array>
+        </dict>
+      </array>
+    </config-file>
+
+    <framework src="CoreMotion.framework" weak="true"/>
+    <framework src="CoreTelephony.framework" weak="true"/>
+    <framework src="libsqlite3.tbd" weak="true"/>
+    <framework src="libc++.tbd" weak="true"/>
+    <framework src="libz.tbd" weak="true"/>
+    <framework src="UIKit.framework" weak="true"/>
+    <framework src="Foundation.framework" weak="true"/>
+    <framework src="JavaScriptCore.framework" weak="true"/>
+    <framework src="SystemConfiguration.framework" weak="true"/>
+
+    <podspec>
+      <config>
+        <source url="http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git"/>
+      </config>
+      <pods>
+        <pod name="AlibcTradeSDK" spec="4.0.0.5"/>
+        <pod name="AliAuthSDK" spec="2.0.0.3"/>
+        <pod name="mtopSDK" spec="3.0.0.4"/>
+        <pod name="securityGuard" spec="5.4.173"/>
+        <pod name="AliLinkPartnerSDK" spec="2.0.0.0"/>
+        <pod name="BCUserTrack" spec="5.2.0.1-appkeys"/>
+        <pod name="UTDID" spec="1.1.0.16"/>
+        <pod name="Toast" tag="4.0.0" git="https://github.com/scalessec/Toast.git"/>
+      </pods>
+    </podspec>
+
+    <header-file src="src/ios/cordovaPluginBaichuan.h"/>
+    <source-file src="src/ios/cordovaPluginBaichuan.m"/>
+    <!--    <hook type="before_plugin_install" src="hook/ios_after_plugin_install.js"/>-->
+    <resource-file src="src/ios/mtopsdk_configuration.plist"/>
+    <!--    <source-file src="src/ios/mtopsdk_configuration.plist" target-dir="../Resources"/>-->
+
+
+    <framework custom="true" src="src/ios/JDKeplerSDK.framework" weak="true"/>
+    <resource-file src="src/ios/Kepler.bundle"/>
+    <source-file src="src/ios/cordovaPluginKepler.m"/>
+
+    <header-file src="src/ios/AppDelegate+BK.h"/>
+    <source-file src="src/ios/AppDelegate+BK.m"/>
+
+  </platform>
+</plugin>
