@@ -14,7 +14,7 @@
     [[AlibcTradeSDK sharedInstance] setDebugLogOpen:YES];
 
     [[AlibcTradeSDK sharedInstance] setIsvVersion:@"2.2.2"];
-//    [[AlibcTradeSDK sharedInstance] setIsvAppName:@"cordova-plugin-baichuan"];
+    //    [[AlibcTradeSDK sharedInstance] setIsvAppName:@"cordova-plugin-baichuan"];
 
     NSString *type = [[self.commandDelegate settings] objectForKey:@"channel_type"];
     NSString *name = [[self.commandDelegate settings] objectForKey:@"channel_name"];
@@ -71,16 +71,23 @@
     if ([self isLogin]) {
         [[ ALBBSDK sharedInstance] logoutWithCallback:^{
             NSLog(@"ALBBSDK logoutWithCallback");
+            [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
         }];
     }
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 - (void)Session:(CDVInvokedUrlCommand *)command{
     if([self isLogin]){
-        NSData *data = [NSJSONSerialization dataWithJSONObject:[[ALBBSession sharedInstance] getUser]
-                                                       options:kNilOptions
-                                                         error:nil];
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]]
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        ALBBUser *user = [[ALBBSession sharedInstance] getUser];
+        dict[@"nick"] = user.nick;
+        dict[@"openId"] = user.openId;
+        dict[@"niopenSidck"] = user.openSid;
+        dict[@"topAccessToken"] = user.topAccessToken;
+        dict[@"topAuthCode"] = user.topAuthCode;
+        dict[@"avatarUrl"] = user.avatarUrl;
+
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                             messageAsDictionary:dict]
                                     callbackId:command.callbackId];
 
     }else{
@@ -90,9 +97,13 @@
 
 - (void)IsLogin:(CDVInvokedUrlCommand *)command
 {
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                               messageAsBool:[self isLogin]]
-                                callbackId:command.callbackId];
+    if([self isLogin]){
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
+                                    callbackId:command.callbackId];
+    }else{
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR]
+                                    callbackId:command.callbackId];
+    }
 }
 
 -(BOOL) isLogin{

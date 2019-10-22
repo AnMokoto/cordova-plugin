@@ -10,21 +10,29 @@
 
 @implementation AppDelegate (cordovaPluginBaichuan)
 
--(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+-(BOOL)application:(UIApplication *)app
+           openURL:(NSURL *)url
+           options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
     if(@available(iOS 9.0,*)){
-        __unused BOOL isHandledByALBBSDK = [[AlibcTradeSDK sharedInstance] application:app openURL:url options:options];
+        __unused BOOL isHandledByALBBSDK = [[AlibcTradeSDK sharedInstance] application:app
+                                                                               openURL:url
+                                                                               options:options];
     }else{
-        // 处理其他app跳转到本app
     }
     return YES;
 
 }
 
--(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    if(![[AlibcTradeSDK sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation]){
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
-
-        // 处理其他app跳转到本app
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation{
+    if(![[AlibcTradeSDK sharedInstance] application:application
+                                            openURL:url
+                                  sourceApplication:sourceApplication
+                                         annotation:annotation]){
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification
+                                                                                             object:url]];
     }
     return YES;
 }

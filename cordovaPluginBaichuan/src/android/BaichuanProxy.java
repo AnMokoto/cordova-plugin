@@ -78,7 +78,12 @@ public class BaichuanProxy {
             return this.getSession(callbackContext);
         } else if (action.startsWith("IsLogin")) {
 //            callbackContext.success(this.isLogin() ? 1 : 0);
-            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, this.isLogin()));
+//             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, this.isLogin()));
+            if(this.isLogin(){
+              callbackContext.success()
+           }else{
+              callbackContext.error("not Log in")
+           }
             return true;
         }
         return false;

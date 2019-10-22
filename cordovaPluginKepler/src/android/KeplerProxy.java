@@ -85,7 +85,7 @@ public class KeplerProxy {
             return this.login(callbackContext);
         } else if (action.startsWith("keplerLogout")) {
             return this.logout(callbackContext);
-        } else if (action.startsWith("keplerSession")) {
+        } else if (action.startsWith("keplerIsLogin")) {
             return this.checkLoginState(callbackContext);
         }
         return false;

@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
   <name>cordovaPluginKepler</name>
   <js-module name="cordovaPluginKepler" src="www/cordovaPluginKepler.js">
-    <clobbers target="kepler"/>
+    <clobbers target="Kepler"/>
   </js-module>
 
   <preference name="APPKEY"/>
