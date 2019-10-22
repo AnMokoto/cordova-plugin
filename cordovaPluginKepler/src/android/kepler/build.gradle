@@ -14,6 +14,12 @@ android {
         //（升级该配置，带来AndroidAPI的更新，需在严格的全面用例测试  需要error级别的容错）
         //(SDK 主要涉及webivew，在更高版本（25）开发测试中，发现向低版本兼容能力在各厂商之间差别较大，暂时稳定在19)
         targetSdkVersion 26
+
+        ndk {
+              // Specifies the ABI configurations of your native
+              // libraries Gradle should build and package with your APK.
+              abiFilters 'x86',  'armeabi', 'armeabi-v7a'
+            }
     }
 
 

@@ -19,7 +19,7 @@
     NSString *type = [[self.commandDelegate settings] objectForKey:@"baichuan_channel_type"];
     NSString *name = [[self.commandDelegate settings] objectForKey:@"baichuan_channel_name"];
 
-    if([type isEqualToString:@"0"] || type == nil){
+    if(type == nil || [type isEqualToString:@"0"]){
         [[AlibcTradeSDK sharedInstance] setChannel:@"0" name:nil];
     }else{
         [[AlibcTradeSDK sharedInstance] setChannel:type name:name];

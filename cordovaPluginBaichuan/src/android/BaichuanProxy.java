@@ -33,14 +33,14 @@ public class BaichuanProxy {
         this.cordova = cordova;
         this.plugin = plugin;
         this.preferences = preferences;
-        this.initialize();
+        // this.initialize();
     }
 
     void initialize() {
         if (isInitialize) return;
         String channelType = this.preferences.getString("baichuan_channel_type", null);
         String channelName = this.preferences.getString("baichuan_channel_name", null);
-        if (channelType.equalsIgnoreCase("0") || channelType == null) {
+        if (channelType == null || channelType.equalsIgnoreCase("0")) {
             AlibcTradeSDK.setChannel("0", null);
         } else {
             AlibcTradeSDK.setChannel(channelType, channelName);
@@ -79,10 +79,10 @@ public class BaichuanProxy {
         } else if (action.startsWith("IsLogin")) {
 //            callbackContext.success(this.isLogin() ? 1 : 0);
 //             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, this.isLogin()));
-            if(this.isLogin(){
-              callbackContext.success()
+            if(this.isLogin()){
+              callbackContext.success();
            }else{
-              callbackContext.error("not Log in")
+              callbackContext.error("not Log in");
            }
             return true;
         }

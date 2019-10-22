@@ -37,7 +37,7 @@ public class KeplerProxy {
         this.cordova = cordova;
         this.plugin = plugin;
         this.preferences = preferences;
-        this.initialize();
+       // this.initialize();
     }
 
     void initialize() {
