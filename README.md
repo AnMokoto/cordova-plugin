@@ -8,12 +8,12 @@
 ## version
 
 `soooooooooooooon`
-* v0.0.2 
+* next 
     1. 打开页面
     2. 加入购物车
     
 `Ready`
-* v0.0.1
+* v0.0.2
   1. 授权登录
   2. 授权取消
   3. 检测授权状态
