@@ -1,9 +1,9 @@
 {
   "name": "cordova-plugin-baichuan-v",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "cordova": {
-    "id": "cordova-plugin-baichuan",
+    "id": "cordova-plugin-baichuan-v",
     "platforms": [
       "android",
       "ios"

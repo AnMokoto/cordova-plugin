@@ -1,4 +1,7 @@
-### 阿里百川SDK
+### [阿里百川SDK](./cordovaPluginBaichuan/README.md) [![npm](https://img.shields.io/npm/v/cordova-plugin-baichuan-v.svg)](https://www.npmjs.com/package/cordova-plugin-baichuan-v)  
+
+`cordova plugin cordova-plugin-baichuan-v --variable BAICHUAN_APPKEY=APPKEY`
+
 
 #### 插件配置
 

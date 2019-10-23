@@ -1,4 +1,6 @@
-### 京东开普勒SDK
+### [京东开普勒SDK](./cordovaPluginKepler/README.md) [![npm](https://img.shields.io/npm/v/cordova-plugin-kepler.svg)](https://www.npmjs.com/package/cordova-plugin-kepler) 
+
+`cordova plugin cordova-plugin-kepler --variable KEPLER_APPKEY=APPKEY --variable KEPLER_APPSECRET=APPSECRET`
 
 #### 插件配置
 
