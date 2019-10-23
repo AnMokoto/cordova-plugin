@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-baichuan",
+  "name": "cordova-plugin-baichuan-v",
   "version": "0.0.1",
   "description": "",
   "cordova": {
@@ -9,9 +9,15 @@
       "ios"
     ]
   },
+  "github": "https://github.com/AnMokoto/cordova-plugin",
+  "issues": "https://github.com/AnMokoto/cordova-plugin/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnMokoto/cordova-plugin.git"
+  },
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "",
+  "author": "Mokoto",
   "license": "ISC"
 }
