@@ -11,7 +11,7 @@
 #pragma mark "API"
 -(void)pluginInitialize {
 
-    [[AlibcTradeSDK sharedInstance] setDebugLogOpen:YES];
+    [[AlibcTradeSDK sharedInstance] setDebugLogOpen:NO];
 
     [[AlibcTradeSDK sharedInstance] setIsvVersion:@"2.2.2"];
     //    [[AlibcTradeSDK sharedInstance] setIsvAppName:@"cordova-plugin-baichuan"];
