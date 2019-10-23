@@ -1,5 +1,12 @@
 ### 京东开普勒SDK
 
+#### 插件配置
+
+* android
+    放置安全图片到 `raw` 文件夹内
+* ios
+    放置安全图片到 `Kepler.bundle`
+
 #### Auth
 
 ```javascript
@@ -21,6 +28,4 @@
     }, e => {
       // 未登录
     })
-
-        
 ```

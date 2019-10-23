@@ -1,5 +1,13 @@
 ### 阿里百川SDK
 
+#### 插件配置
+
+* android
+    放置安全图片到 `drawable` 文件夹内
+* ios
+    1. 放置安全图片到 项目目录内
+    2. 编译增加 `-lstdc++`
+
 #### Auth
 
 ```javascript
