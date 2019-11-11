@@ -79,8 +79,8 @@
         <pod name="Toast" tag="4.0.0" git="https://github.com/scalessec/Toast.git"/>
       </pods>
     </podspec>
-    <header-file src="src/ios/AppDelegate+cordovaPluginBaichuan.h"/>
-    <source-file src="src/ios/AppDelegate+cordovaPluginBaichuan.m"/>
+<!--    <header-file src="src/ios/AppDelegate+cordovaPluginBaichuan.h"/>-->
+<!--    <source-file src="src/ios/AppDelegate+cordovaPluginBaichuan.m"/>-->
     <header-file src="src/ios/cordovaPluginBaichuan.h"/>
     <source-file src="src/ios/cordovaPluginBaichuan.m"/>
     <!--    <hook type="before_plugin_install" src="hook/ios_after_plugin_install.js"/>-->

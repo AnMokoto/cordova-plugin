@@ -11,6 +11,8 @@
 #pragma mark "API"
 -(void)pluginInitialize {
 
+    APPKEY = [[self.commandDelegate settings] objectForKey:@"baichuan_appkey"];
+
     [[AlibcTradeSDK sharedInstance] setDebugLogOpen:NO];
 
     [[AlibcTradeSDK sharedInstance] setIsvVersion:@"2.2.2"];
@@ -123,5 +125,13 @@
 //
 //    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 //}
-
+- (void)handleOpenURL:(NSNotification *)notification {
+    NSURL* url = [notification object];
+    if ([url isKindOfClass:[NSURL class]] && [url.scheme isEqualToString:[NSString stringWithFormat:@"tbopen%@", APPKEY]]){
+    [[AlibcTradeSDK sharedInstance] application:[UIApplication sharedApplication]
+                                        openURL:[notification object]
+                                        options:[notification userInfo]
+     ];
+    }
+}
 @end

@@ -7,7 +7,9 @@
 
 #import <Cordova/CDV.h>
 
-@interface cordovaPluginBaichuan : CDVPlugin
+@interface cordovaPluginBaichuan : CDVPlugin{
+NSString *APPKEY;
+}
 // Member variables go here.
 @property (atomic,assign) BOOL isInitial;
 /** 登录 */

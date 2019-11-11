@@ -123,8 +123,8 @@
 
     <framework custom="true" src="src/ios/JDKeplerSDK.framework" weak="true"/>
     <resource-file src="src/ios/Kepler.bundle"/>
-    <source-file src="src/ios/AppDelegate+cordovaPluginKepler.h"/>
-    <source-file src="src/ios/AppDelegate+cordovaPluginKepler.m"/>
+<!--    <source-file src="src/ios/AppDelegate+cordovaPluginKepler.h"/>-->
+<!--    <source-file src="src/ios/AppDelegate+cordovaPluginKepler.m"/>-->
     <source-file src="src/ios/cordovaPluginKepler.m"/>
   </platform>
 </plugin>

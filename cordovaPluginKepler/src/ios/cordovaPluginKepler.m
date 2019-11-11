@@ -6,9 +6,12 @@
 
 typedef void (^Callback)(void);
 
-@interface cordovaPluginKepler : CDVPlugin
+@interface cordovaPluginKepler : CDVPlugin{
+NSString *APPKEY;
+}
     // Member variables go here.
 @property (atomic,assign) BOOL isInitial;
+
 - (void)keplerLogin:(CDVInvokedUrlCommand*)command;
 - (void)keplerLogout:(CDVInvokedUrlCommand*)command;
 - (void)keplerIsLogin:(CDVInvokedUrlCommand*)command;
@@ -18,7 +21,7 @@ typedef void (^Callback)(void);
 @implementation cordovaPluginKepler
 #pragma mark "API"
 - (void)pluginInitialize{
-    NSString *APPKEY = [[self.commandDelegate settings] objectForKey:@"kepler_appkey"];
+    APPKEY = [[self.commandDelegate settings] objectForKey:@"kepler_appkey"];
     NSString *APPSECRET = [[self.commandDelegate settings] objectForKey:@"kepler_appsecret"];
     [[KeplerApiManager sharedKPService] asyncInitSdk:APPKEY
                                            secretKey:APPSECRET
@@ -79,4 +82,11 @@ typedef void (^Callback)(void);
     [[KeplerApiManager sharedKPService] keplerLoginWithSuccess:call failure:fail];
 }
 
+
+- (void)handleOpenURL:(NSNotification *)notification{
+    NSURL* url = [notification object];
+    if ([url isKindOfClass:[NSURL class]] && [url.scheme isEqualToString:[NSString stringWithFormat:@"sdkback%@",APPKEY]]){
+        [[KeplerApiManager sharedKPService] handleOpenURL:url];
+    }
+}
 @end

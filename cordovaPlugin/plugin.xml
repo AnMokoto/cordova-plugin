@@ -167,8 +167,8 @@
     <resource-file src="src/ios/Kepler.bundle"/>
     <source-file src="src/ios/cordovaPluginKepler.m"/>
 
-    <header-file src="src/ios/AppDelegate+BK.h"/>
-    <source-file src="src/ios/AppDelegate+BK.m"/>
+<!--    <header-file src="src/ios/AppDelegate+BK.h"/>-->
+<!--    <source-file src="src/ios/AppDelegate+BK.m"/>-->
 
   </platform>
 </plugin>
